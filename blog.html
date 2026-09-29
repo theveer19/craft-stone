@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stone Journal | Gwalior Stone Crafts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="page-fix.css">
+</head>
+
+<body>
+
+  <a href="https://wa.me/919005533115?text=Hi%20Gwalior%20Stone%20Crafts!%20I'm%20interested%20in%20your%20collection." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <span style="font-size:1.5rem;">📱</span>
+  </a>
+
+  <!-- NAV -->
+  <nav id="mainNav"></nav>
+
+  <!-- Hero -->
+  <div class="page-hero blog-bg" style="padding-top:72px">
+    <div>
+      <div class="breadcrumb">Home / <span>Stone Journal</span></div>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:#fff;margin-top:8px">Stone Journal</h1>
+    </div>
+  </div>
+
+  <div class="blog-grid" id="blogGrid"></div>
+
+  <!-- FOOTER -->
+  <footer id="mainFooter"></footer>
+
+  <script src="data.js"></script>
+  <script src="nav.js"></script>
+  <script src="footer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      injectNav('blog');
+      injectFooter();
+      renderBlog();
+    });
+
+    function renderBlog() {
+      document.getElementById('blogGrid').innerHTML = BLOG_POSTS.map(b => `
+        <div class="blog-card">
+          <div class="blog-img" data-bg="${thumbOf(b.img)}" style="background-size:cover;background-position:center"></div>
+          <div class="blog-meta">
+            <div class="blog-tag">${b.tag}</div>
+            <div class="blog-date">${b.date}</div>
+          </div>
+          <div class="blog-info">
+            <h3>${b.title}</h3>
+            <p>${b.desc}</p>
+            <div class="blog-read">Read More →</div>
+          </div>
+        </div>
+      `).join('');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery | Gwalior Stone Crafts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="page-fix.css">
+</head>
+<body>
+
+  <a href="https://wa.me/919005533115?text=Hi%20Gwalior%20Stone%20Crafts!%20I'm%20interested%20in%20your%20collection." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <span style="font-size:1.5rem;">📱</span>
+  </a>
+
+  <!-- NAV -->
+  <nav id="mainNav"></nav>
+
+  <!-- Hero -->
+  <div class="page-hero gallery-bg" style="padding-top:72px">
+    <div>
+      <div class="breadcrumb">Home / <span>Gallery</span></div>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:#fff;margin-top:8px">Project Gallery</h1>
+    </div>
+  </div>
+
+  <div class="gallery-filters">
+    <button class="gal-filter active" onclick="filterGallery('all',this)">All Projects</button>
+    <button class="gal-filter" onclick="filterGallery('wall',this)">Wall Cladding</button>
+    <button class="gal-filter" onclick="filterGallery('jali',this)">Stone Jali</button>
+    <button class="gal-filter" onclick="filterGallery('fountain',this)">Waterfalls &amp; Fountains</button>
+    <button class="gal-filter" onclick="filterGallery('crafts',this)">Stone Crafts</button>
+    <button class="gal-filter" onclick="filterGallery('landscape',this)">Landscaping &amp; Cobbles</button>
+    <button class="gal-filter" onclick="filterGallery('balustrade',this)">Balustrades</button>
+    <button class="gal-filter" onclick="filterGallery('mandir',this)">Mandirs</button>
+    <button class="gal-filter" onclick="filterGallery('signage',this)">Signage</button>
+  </div>
+  <div class="gallery-count" id="galleryCount"></div>
+
+  <div class="gallery-masonry" id="galleryGrid"></div>
+  <div class="gallery-more" id="galleryMore"><button onclick="showMore()">Load More Photos</button></div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-btn lightbox-close" onclick="closeLightbox()" aria-label="Close">✕</button>
+    <button class="lightbox-btn lightbox-prev" onclick="stepLightbox(-1, event)" aria-label="Previous">‹</button>
+    <img id="lightboxImg" src="" alt="" onclick="event.stopPropagation()"/>
+    <button class="lightbox-btn lightbox-next" onclick="stepLightbox(1, event)" aria-label="Next">›</button>
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="mainFooter"></footer>
+
+  <script src="data.js"></script>
+  <script src="nav.js"></script>
+  <script src="footer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      injectNav('gallery');
+      injectFooter();
+      renderGallery('all');
+    });
+
+    let currentItems = [];
+    let lbIndex = 0;
+
+    const PAGE_SIZE = 36;
+    let shown = 0;
+
+    function galleryItemHTML(g, i) {
+      return `
+        <div class="gal-item" data-cat="${g.cat}" onclick="openLightbox(${i})">
+          <div class="gal-img" data-bg="${thumbOf(g.img)}" style="height:${g.h}px;background-size:cover;background-position:center"></div>
+          <div class="gal-overlay">
+            <div class="gal-overlay-icon">⊕</div>
+          </div>
+        </div>`;
+    }
+
+    function renderGallery(cat) {
+      currentItems = cat === 'all' ? GALLERY_ITEMS : GALLERY_ITEMS.filter(g => g.cat === cat);
+      shown = 0;
+      document.getElementById('galleryGrid').innerHTML = '';
+      showMore();
+    }
+
+    function showMore() {
+      const next = currentItems.slice(shown, shown + PAGE_SIZE);
+      document.getElementById('galleryGrid').insertAdjacentHTML('beforeend',
+        next.map((g, k) => galleryItemHTML(g, shown + k)).join(''));
+      shown += next.length;
+      document.getElementById('galleryCount').textContent =
+        `Showing ${shown} of ${currentItems.length} photos`;
+      document.getElementById('galleryMore').style.display = shown < currentItems.length ? '' : 'none';
+    }
+
+    function filterGallery(cat, btn) {
+      document.querySelectorAll('.gal-filter').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderGallery(cat);
+    }
+
+    // ── Lightbox ──
+    function openLightbox(i) {
+      lbIndex = i;
+      showLightboxImage();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function showLightboxImage() {
+      const item = currentItems[lbIndex];
+      if (!item) return;
+      const img = document.getElementById('lightboxImg');
+      img.src = item.img;
+      img.alt = item.title || 'Project photo';
+      document.getElementById('lightboxCaption').textContent =
+        (item.title ? item.title + '  ·  ' : '') + (lbIndex + 1) + ' / ' + currentItems.length;
+    }
+    function stepLightbox(dir, e) {
+      if (e) e.stopPropagation();
+      lbIndex = (lbIndex + dir + currentItems.length) % currentItems.length;
+      showLightboxImage();
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') stepLightbox(1);
+      if (e.key === 'ArrowLeft') stepLightbox(-1);
+    });
+  </script>
+</body>
+</html>

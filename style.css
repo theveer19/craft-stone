@@ -249,14 +249,14 @@
     position: absolute;
     width: 72%; height: 82%;
     right: 0; top: 0;
-    background: url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=800&q=80') center/cover;
+    background:  url('images/blogpost/722edb9b-b98f-44f6-87ad-cd013046f0b4.jpg') center/cover;
     border-radius: 2px;
   }
   .about-img-accent {
     position: absolute;
     width: 44%; height: 50%;
     left: 0; bottom: 0;
-    background: url('https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=600&q=80') center/cover;
+    background:  url('images/wall-coverings/img-0946.jpg') center/cover;
     border-radius: 2px;
     border: 6px solid var(--warm-white);
   }
@@ -306,7 +306,7 @@
   .products-hero {
     height: 340px;
     background: linear-gradient(to right, rgba(44,36,22,0.85), rgba(92,74,42,0.6)),
-                url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=80') center/cover;
+                url('images/stone-crafts/img-8422.jpg') center/cover;
     display: flex; align-items: flex-end;
     padding: 0 8% 56px;
   }
@@ -643,19 +643,19 @@
   }
   .page-hero.about-bg {
     background: linear-gradient(to right, rgba(44,36,22,0.8), rgba(92,74,42,0.5)),
-                url('https://images.unsplash.com/photo-1618090583870-3c06b7b21e8c?w=1600&q=80') center/cover;
+                url('images/stone-crafts/img-8545.jpg') center/cover;
   }
   .page-hero.gallery-bg {
     background: linear-gradient(to right, rgba(44,36,22,0.8), rgba(92,74,42,0.5)),
-                url('https://images.unsplash.com/photo-1600607687126-8a3414349a51?w=1600&q=80') center/cover;
+                url('images/stone-crafts/img-8423.jpg') center/cover;
   }
   .page-hero.contact-bg {
     background: linear-gradient(to right, rgba(44,36,22,0.8), rgba(92,74,42,0.5)),
-                url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80') center/cover;
+                url('images/stone-jali/img-8112.jpg') center/cover;
   }
   .page-hero.blog-bg {
     background: linear-gradient(to right, rgba(44,36,22,0.8), rgba(92,74,42,0.5)),
-                url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1600&q=80') center/cover;
+                url('images/waterfalls-fountains/img-9405.jpg') center/cover;
   }
 
   .timeline { position: relative; padding: 60px 8%; }

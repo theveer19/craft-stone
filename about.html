@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | Gwalior Stone Crafts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="page-fix.css">
+</head>
+<body>
+
+  <a href="https://wa.me/919005533115?text=Hi%20Gwalior%20Stone%20Crafts!%20I'm%20interested%20in%20your%20collection." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <span style="font-size:1.5rem;">📱</span>
+  </a>
+
+  <!-- NAV -->
+  <nav id="mainNav"></nav>
+
+  <!-- Hero -->
+  <div class="page-hero about-bg" style="padding-top:72px">
+    <div>
+      <div class="breadcrumb">Home / <span>About Us</span></div>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:#fff;margin-top:8px">Our Story</h1>
+    </div>
+  </div>
+
+  <section style="padding:80px 8% 40px">
+    <div style="max-width:800px">
+      <div class="section-tag">Who We Are</div>
+      <h2 class="section-title">A Legacy Carved in Stone</h2>
+      <p style="font-size:1rem;color:var(--mid);line-height:1.9;font-weight:300;margin-bottom:20px">
+        Founded in 1999, Gwalior Stone Crafts began as a modest quarry operation in Rajasthan. Today, with an annual turnover of $45 million USD and over 6,000 containers exported per year, we are one of India's most celebrated natural stone companies.
+      </p>
+      <p style="font-size:1rem;color:var(--mid);line-height:1.9;font-weight:300">
+        Our passion for stonework runs deep — from the ancient quarries of Rajasthan to luxury interiors in Europe, the Middle East, Australia and beyond. Every slab, tile and crafted piece bears our commitment to quality, sustainability and artisanship.
+      </p>
+    </div>
+  </section>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="timeline-year">1999</div>
+        <h3>The Beginning</h3>
+        <p>Gwalior Stone Crafts was founded in Jaipur, Rajasthan with a vision to bring India's finest stones to the global market. Our first export consignment shipped to the United Kingdom.</p>
+      </div>
+      <div class="timeline-visual" style="background-image:url('images/cobbles/3d58f9a0-68d5-43eb-ab63-454e8483b141.jpg')"></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-visual" style="background-image:url('images/cobbles/5ad098c3-03a1-443c-8ac1-891b5a363a59.jpg')"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">2005</div>
+        <h3>Global Expansion</h3>
+        <p>We expanded into 20+ countries, established dedicated sales offices in Europe and the Middle East, and launched our luxury marble collection for high-end residential projects.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="timeline-year">2012</div>
+        <h3>ISO Certification & Green Energy</h3>
+        <p>Achieved ISO 9001:2015 and ISO 14001:2015 certifications. Installed wind turbines at our processing plant — a first for the Indian stone industry.</p>
+      </div>
+      <div class="timeline-visual" style="background-image:url('images/cobbles/5d83b959-a868-473f-add7-cf951107d9b1.jpg')"></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-visual" style="background-image:url('images/cobbles/7d0d767f-0fa4-491f-9665-a1bf99e472a1.jpg')"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">2024</div>
+        <h3>$45M Milestone</h3>
+        <p>Reached $45 million annual turnover, serving 50+ countries with 6,000+ containers. Launched the Pietra Dura luxury inlay collection, celebrating India's decorative stone heritage.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cert-grid">
+    <div class="cert-card">
+      <div class="cert-icon">🏅</div>
+      <h4>ISO 9001:2015</h4>
+      <p>Quality Management System certification ensuring consistent, high-grade production standards.</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🌿</div>
+      <h4>ISO 14001:2015</h4>
+      <p>Environmental Management — green quarrying, renewable energy, minimal waste processing.</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">👷</div>
+      <h4>ISO 45001:2018</h4>
+      <p>Occupational Health & Safety — protecting every worker from quarry to shipment.</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🤝</div>
+      <h4>SA 8000:2014</h4>
+      <p>Social Accountability — ethical trade, fair wages, no child labour, verified annually.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="mainFooter"></footer>
+
+  <script src="data.js"></script>
+  <script src="nav.js"></script>
+  <script src="footer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      injectNav('about');
+      injectFooter();
+    });
+  </script>
+</body>
+</html>

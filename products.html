@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Products | Gwalior Stone Crafts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="page-fix.css">
+</head>
+<body>
+
+  <a href="https://wa.me/919005533115?text=Hi%20Gwalior%20Stone%20Crafts!%20I'm%20interested%20in%20your%20collection." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <span style="font-size:1.5rem;">📱</span>
+  </a>
+
+  <!-- NAV -->
+  <nav id="mainNav"></nav>
+
+  <!-- Products Hero -->
+  <div class="products-hero">
+    <div>
+      <div class="breadcrumb">Home / <span>Products</span></div>
+      <h1>Our Stone Collection</h1>
+    </div>
+  </div>
+
+  <div class="products-layout">
+    <!-- Sidebar -->
+    <div class="products-sidebar">
+      <div class="sidebar-title">Browse Categories</div>
+      <div id="mainCatList"></div>
+    </div>
+
+    <!-- Main products -->
+    <div class="products-main">
+      <div class="category-tabs"></div>
+
+      <div class="products-toolbar">
+        <div class="products-count">
+          <span id="catBreadcrumb" style="display:block;margin-bottom:4px;font-size:0.72rem;color:var(--stone);letter-spacing:0.05em"></span>
+          <strong id="productCount">0</strong> products found
+        </div>
+        <div class="view-sort">
+          <select class="sort-select" onchange="sortProducts(this.value)">
+            <option value="default">Sort: Featured</option>
+            <option value="name-az">Name: A–Z</option>
+            <option value="name-za">Name: Z–A</option>
+            <option value="popular">Most Popular</option>
+          </select>
+          <div class="view-btns">
+            <button class="view-btn active" onclick="setView('grid',this)" title="Grid View">⊞</button>
+            <button class="view-btn" onclick="setView('list',this)" title="List View">≡</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="products-grid" id="productsGrid"></div>
+    </div>
+  </div>
+
+  <!-- PRODUCT MODAL -->
+  <div class="modal-overlay" id="productModal" onclick="closeModal(event)">
+    <div class="modal" style="position:relative">
+      <button class="modal-close" onclick="closeModalDirect()">✕</button>
+      <div class="modal-img" id="modalImg"></div>
+      <div class="modal-body">
+        <div class="modal-category" id="modalCat"></div>
+        <div class="modal-name" id="modalName"></div>
+        <div class="modal-thumbs" id="modalThumbs"></div>
+        <div class="modal-desc" id="modalDesc"></div>
+        <div class="modal-specs">
+          <h4>Specifications</h4>
+          <div class="spec-grid" id="modalSpecs"></div>
+        </div>
+        <div class="modal-cta">
+          <button class="btn-q" onclick="window.location.href='contact.html';closeModalDirect()">Request Quote</button>
+          <button class="btn-s" onclick="closeModalDirect()">Continue Browsing</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="mainFooter"></footer>
+
+  <script src="data.js"></script>
+  <script src="nav.js"></script>
+  <script src="footer.js"></script>
+  <script src="products.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      injectNav('products');
+      injectFooter();
+      initCategoryTabs();
+      buildSidebar();
+
+      // Read ?cat= from URL to pre-filter
+      const params = new URLSearchParams(window.location.search);
+      const cat = params.get('cat');
+      if (cat) {
+        activeMainCategory = cat;
+        setTimeout(() => showSubcategories(cat), 80);
+      } else {
+        renderProductsView('all', 'all');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# Never commit API keys / secrets (the old Cloudinary upload script held one)
+upload-to-cloudinary.js
+.env
+
+# Node
+node_modules/
+
+# Original full-size photo dumps (the site uses the optimized /images folder)
+assets/
+updatedImg/
+push-to-github.bat
