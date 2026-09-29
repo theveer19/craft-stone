@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product | Gwalior Stone Crafts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="page-fix.css">
+  <link rel="stylesheet" href="enhance.css">
+</head>
+<body>
+
+  <a href="https://wa.me/919005533115?text=Hi%20Gwalior%20Stone%20Crafts!%20I'm%20interested%20in%20your%20collection." class="whatsapp-float" id="waFloat" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <span style="font-size:1.5rem;">📱</span>
+  </a>
+
+  <!-- NAV -->
+  <nav id="mainNav"></nav>
+
+  <main class="pd-page">
+    <div class="pd-crumbs" id="pdCrumbs">
+      <a href="index.html">Home</a> / <a href="products.html">Products</a>
+    </div>
+
+    <!-- Product not found -->
+    <div class="pd-missing" id="pdMissing" hidden>
+      <h1>Product not found</h1>
+      <p>This product may have been renamed or removed.</p>
+      <a class="btn-dark" href="products.html">View all products</a>
+    </div>
+
+    <div class="pd-main" id="pdMain" hidden>
+      <!-- Photos -->
+      <div class="pd-gallery">
+        <div class="pd-stage" onclick="openPdLightbox()" title="Click to view full screen">
+          <div class="pd-stage-bg" id="pdBg"></div>
+          <img id="pdImg" src="" alt=""/>
+          <button class="pd-nav pd-prev" onclick="stepPd(-1, event)" aria-label="Previous photo">‹</button>
+          <button class="pd-nav pd-next" onclick="stepPd(1, event)" aria-label="Next photo">›</button>
+          <div class="pd-counter" id="pdCounter"></div>
+          <div class="pd-zoom">⤢ Full screen</div>
+        </div>
+        <div class="pd-thumbs" id="pdThumbs"></div>
+      </div>
+
+      <!-- Details -->
+      <div class="pd-info">
+        <div class="pd-cat" id="pdCat"></div>
+        <h1 class="pd-name" id="pdName"></h1>
+        <div class="pd-badge" id="pdBadge" hidden></div>
+        <div class="pd-price">Price: <span id="pdPrice"></span></div>
+        <p class="pd-desc" id="pdDesc"></p>
+
+        <div class="pd-finishes" id="pdFinishWrap">
+          <div class="pd-label">Available Shades</div>
+          <div class="pd-dots" id="pdFinishes"></div>
+        </div>
+
+        <div class="pd-label">Specifications</div>
+        <div class="spec-grid" id="pdSpecs"></div>
+
+        <div class="pd-cta">
+          <a class="pd-btn pd-btn-wa" id="pdWa" target="_blank" rel="noopener">WhatsApp Enquiry</a>
+          <button type="button" class="pd-btn pd-btn-quote" id="pdQuote" onclick="openQuote()">Request Quote</button>
+        </div>
+        <div class="pd-trust"><span>Custom sizes &amp; finishes</span><span>Delivery across India</span><span>Quick reply on WhatsApp</span></div>
+        <a class="pd-back" href="products.html">← Back to all products</a>
+      </div>
+    </div>
+
+    <!-- Related -->
+    <section class="pd-related" id="pdRelatedWrap" hidden>
+      <h2 class="pd-related-title">More from <span id="pdRelatedCat"></span></h2>
+      <div class="products-grid" id="pdRelated"></div>
+    </section>
+  </main>
+
+  <!-- Quote request for THIS product -->
+  <div class="qm" id="quoteModal" onclick="if(event.target===this)closeQuote()" aria-hidden="true">
+    <form class="qm-box" onsubmit="sendQuote(event)" novalidate>
+      <div class="qm-head">
+        <div class="qm-thumb" id="qmThumb"></div>
+        <div>
+          <small>Quote request for</small>
+          <h3 id="qmName"></h3>
+        </div>
+        <button type="button" class="qm-close" onclick="closeQuote()" aria-label="Close">✕</button>
+      </div>
+      <div class="qm-body">
+        <div class="qm-row">
+          <div><label for="qName">Your Name <i>*</i></label><input id="qName" autocomplete="name" placeholder="Full name"/></div>
+          <div><label for="qPhone">Phone / WhatsApp <i>*</i></label><input id="qPhone" type="tel" autocomplete="tel" placeholder="+91 98765 43210"/></div>
+        </div>
+        <div class="qm-row">
+          <div><label for="qCity">City / Site Location</label><input id="qCity" placeholder="e.g. Gwalior"/></div>
+          <div><label for="qQty">Quantity Needed</label><input id="qQty" placeholder="e.g. 500 sq ft / 10 pcs"/></div>
+        </div>
+        <div><label for="qMsg">Requirements</label><textarea id="qMsg" rows="3" placeholder="Size, finish, thickness, timeline…"></textarea></div>
+        <div class="qm-actions">
+          <button type="submit" class="qm-send"><span id="qmIcon"></span>Send Quote Request</button>
+          <div class="qm-alt">or <a id="qmMail" href="#">send by email</a> · call <a href="tel:+919005533115">+91 90055 33115</a></div>
+        </div>
+        <div class="qm-note">Your request opens in WhatsApp with this product's name, so our team knows exactly what you need.</div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Full-screen photo viewer -->
+  <div class="lightbox" id="pdLightbox" onclick="closePdLightbox()">
+    <button class="lightbox-btn lightbox-close" onclick="closePdLightbox()" aria-label="Close">✕</button>
+    <button class="lightbox-btn lightbox-prev" onclick="stepPd(-1, event)" aria-label="Previous">‹</button>
+    <img id="pdLbImg" src="" alt="" onclick="event.stopPropagation()"/>
+    <button class="lightbox-btn lightbox-next" onclick="stepPd(1, event)" aria-label="Next">›</button>
+    <div class="lightbox-caption" id="pdLbCaption"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="mainFooter"></footer>
+
+  <script src="data.js"></script>
+  <script src="nav.js"></script>
+  <script src="footer.js"></script>
+  <script src="products.js"></script>
+  <script>
+    const WA_NUMBER = '919005533115';
+    let pd = null, pdImgs = [], pdIndex = 0;
+
+    function findProduct() {
+      const q = new URLSearchParams(location.search);
+      const slug = q.get('p');
+      if (slug) return PRODUCTS.find(p => p.slug === slug);
+      const id = parseInt(q.get('id'), 10);           // old-style links still work
+      return id ? PRODUCTS.find(p => p.id === id) : null;
+    }
+
+    function showPd(i) {
+      pdIndex = (i + pdImgs.length) % pdImgs.length;
+      const src = pdImgs[pdIndex];
+      const img = document.getElementById('pdImg');
+      document.getElementById('pdBg').style.backgroundImage = `url('${thumbOf(src)}')`;
+      img.classList.add('swap');
+      img.onload = () => {
+        // Small photos: enlarge, but not so much that they turn to mush
+        const k = 2.4;
+        img.style.maxWidth  = img.naturalWidth  < 600 ? img.naturalWidth  * k + 'px' : '';
+        img.style.maxHeight = img.naturalHeight < 600 ? img.naturalHeight * k + 'px' : '';
+        img.classList.remove('swap');
+      };
+      img.src = src;
+      img.alt = pd.name + ' — photo ' + (pdIndex + 1);
+      document.getElementById('pdCounter').textContent = pdImgs.length > 1 ? (pdIndex + 1) + ' / ' + pdImgs.length : '';
+      document.querySelectorAll('.pd-thumb').forEach((t, k) => t.classList.toggle('active', k === pdIndex));
+      const active = document.querySelector('.pd-thumb.active');
+      if (active) active.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      if (document.getElementById('pdLightbox').classList.contains('open')) updateLb();
+      // warm the next photo so arrows feel instant
+      if (pdImgs.length > 1) { const n = new Image(); n.src = pdImgs[(pdIndex + 1) % pdImgs.length]; }
+    }
+
+    function stepPd(d, e) { if (e) e.stopPropagation(); if (pdImgs.length > 1) showPd(pdIndex + d); }
+
+    function openPdLightbox() {
+      document.getElementById('pdLightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      updateLb();
+    }
+    function updateLb() {
+      document.getElementById('pdLbImg').src = pdImgs[pdIndex];
+      document.getElementById('pdLbCaption').textContent =
+        pd.name + (pdImgs.length > 1 ? '  ·  ' + (pdIndex + 1) + ' / ' + pdImgs.length : '');
+    }
+    function closePdLightbox() {
+      document.getElementById('pdLightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => {
+      if (!pd) return;
+      if (e.target.closest && e.target.closest('input, textarea')) return;
+      if (e.key === 'ArrowLeft') stepPd(-1);
+      else if (e.key === 'ArrowRight') stepPd(1);
+      else if (e.key === 'Escape') { closePdLightbox(); closeQuote(); }
+    });
+
+    // Swipe on phones
+    (function () {
+      let x0 = null;
+      ['pdImg', 'pdLbImg'].forEach(id => {
+        const el = document.getElementById(id);
+        el.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+        el.addEventListener('touchend', e => {
+          if (x0 === null) return;
+          const dx = e.changedTouches[0].clientX - x0;
+          if (Math.abs(dx) > 40) stepPd(dx < 0 ? 1 : -1);
+          x0 = null;
+        });
+      });
+    })();
+
+    const WA_ICON = '<svg viewBox="0 0 32 32" aria-hidden="true" fill="currentColor"><path d="M16 3C8.8 3 3 8.6 3 15.6c0 2.5.8 4.9 2.1 6.9L3.6 29l6.7-1.7c1.8 1 3.8 1.5 5.8 1.5 7.2 0 13-5.6 13-12.6S23.2 3 16 3zm0 23.3c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4 1 1-3.8-.2-.4c-1-1.6-1.6-3.5-1.6-5.4C5.7 10 10.3 5.5 16 5.5S26.3 10 26.3 15.6 21.7 26.3 16 26.3zm5.7-7.6c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6l-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.1 1.4 3.4c.2.2 2.4 3.6 5.8 5 .8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.3z"/></svg>';
+
+    // ── Quote request for this exact product ──
+    function quoteText() {
+      const v = id => document.getElementById(id).value.trim();
+      const cat = getCategoryLabel(pd.mainCategory, pd.subCategory);
+      const lines = [
+        '*Quote Request*',
+        '*Product:* ' + pd.name,
+        '*Category:* ' + cat,
+        pd.price ? '*Listed price:* ' + pd.price : '',
+        '*Link:* ' + location.origin + location.pathname + '?p=' + pd.slug,
+        '',
+        '*Name:* ' + v('qName'),
+        '*Phone:* ' + v('qPhone'),
+        v('qCity') ? '*Location:* ' + v('qCity') : '',
+        v('qQty')  ? '*Quantity:* ' + v('qQty') : '',
+        v('qMsg')  ? '*Requirements:* ' + v('qMsg') : ''
+      ];
+      return lines.filter((l, i) => l || i === 5).join('\n');
+    }
+    function openQuote() {
+      const m = document.getElementById('quoteModal');
+      m.classList.add('open'); m.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => document.getElementById('qName').focus(), 350);
+    }
+    function closeQuote() {
+      const m = document.getElementById('quoteModal');
+      m.classList.remove('open'); m.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    function sendQuote(e) {
+      e.preventDefault();
+      let ok = true;
+      ['qName', 'qPhone'].forEach(id => {
+        const el = document.getElementById(id);
+        const bad = id === 'qPhone' ? el.value.replace(/\D/g, '').length < 10 : !el.value.trim();
+        el.classList.toggle('err', bad);
+        if (bad && ok) { el.focus(); ok = false; }
+      });
+      if (!ok) return;
+      window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(quoteText()), '_blank');
+      closeQuote();
+    }
+    document.addEventListener('input', e => { if (e.target.classList && e.target.classList.contains('err')) e.target.classList.remove('err'); });
+    document.addEventListener('click', e => {
+      const a = e.target.closest('#qmMail');
+      if (!a || !pd) return;
+      e.preventDefault();
+      location.href = 'mailto:gwaliorstonecrafts@gmail.com?subject=' + encodeURIComponent('Quote request: ' + pd.name) +
+                      '&body=' + encodeURIComponent(quoteText().replace(/\*/g, ''));
+    });
+
+    function renderProduct() {
+      pd = findProduct();
+      if (!pd) { document.getElementById('pdMissing').hidden = false; return; }
+
+      const catLabel  = getCategoryLabel(pd.mainCategory, pd.subCategory);
+      const main      = MAIN_CATEGORIES.find(m => m.id === pd.mainCategory);
+      const mainLabel = main ? main.label : catLabel;
+
+      document.title = pd.name + ' | Gwalior Stone Crafts';
+      document.getElementById('pdCrumbs').innerHTML =
+        `<a href="index.html">Home</a> / <a href="products.html">Products</a> / ` +
+        `<a href="products.html?cat=${pd.mainCategory}">${mainLabel}</a> / <span>${pd.name}</span>`;
+
+      pdImgs = (pd.imgs && pd.imgs.length) ? pd.imgs : [pd.img];
+      document.getElementById('pdThumbs').innerHTML = pdImgs.length > 1 ? pdImgs.map((src, i) =>
+        `<button class="pd-thumb" style="background-image:url('${thumbOf(src)}')" onclick="showPd(${i})" aria-label="Photo ${i + 1}"></button>`
+      ).join('') : '';
+      document.querySelectorAll('.pd-nav').forEach(b => b.hidden = pdImgs.length < 2);
+
+      document.getElementById('pdCat').textContent  = catLabel;
+      document.getElementById('pdName').textContent = pd.name;
+      document.getElementById('pdDesc').textContent = pd.desc || '';
+      document.getElementById('pdPrice').textContent = pd.price || 'On Request';
+      if (pd.badge) {
+        const b = document.getElementById('pdBadge');
+        b.hidden = false; b.textContent = pd.badge; b.className = 'pd-badge product-badge ' + pd.badge;
+      }
+
+      const fin = pd.finishes || [];
+      if (fin.length) document.getElementById('pdFinishes').innerHTML =
+        fin.map(f => `<span class="pd-dot" style="background:${f}"></span>`).join('');
+      else document.getElementById('pdFinishWrap').hidden = true;
+
+      document.getElementById('pdSpecs').innerHTML = Object.entries(pd.specs || {}).map(([k, v]) =>
+        `<div class="spec-item"><div class="spec-key">${k}</div><div class="spec-val">${v}</div></div>`).join('');
+
+      const msg = `Hi Gwalior Stone Crafts! I'm interested in *${pd.name}* (${catLabel}). Please share price and details.\n${location.href}`;
+      const wa  = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+      document.getElementById('pdWa').href = wa;
+      document.getElementById('waFloat').href = wa;
+      document.getElementById('qmName').textContent = pd.name;
+      document.getElementById('qmThumb').style.backgroundImage = `url('${thumbOf(pdImgs[0])}')`;
+      document.getElementById('qmIcon').outerHTML = WA_ICON;
+      if (new URLSearchParams(location.search).get('quote')) setTimeout(openQuote, 400);
+
+      document.getElementById('pdMain').hidden = false;
+      showPd(0);
+
+      // Related products from the same category
+      const rel = PRODUCTS.filter(p => p.mainCategory === pd.mainCategory && p.id !== pd.id).slice(0, 6);
+      if (rel.length) {
+        document.getElementById('pdRelatedCat').textContent = mainLabel;
+        document.getElementById('pdRelated').innerHTML = rel.map(p => `
+          <a class="product-card" href="${productUrl(p)}">
+            <div class="product-img-wrap">
+              <div class="product-img" data-bg="${thumbOf(p.img)}"></div>
+              ${(p.imgs && p.imgs.length > 1) ? `<div class="photo-count">${p.imgs.length} photos</div>` : ''}
+            </div>
+            <div class="product-info">
+              <div class="product-category">${getCategoryLabel(p.mainCategory, p.subCategory)}</div>
+              <div class="product-name">${p.name}</div>
+              <div class="product-desc">${p.desc}</div>
+            </div>
+          </a>`).join('');
+        document.getElementById('pdRelatedWrap').hidden = false;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      injectNav('products');
+      injectFooter();
+      renderProduct();
+    });
+  </script>
+  <script src="vendor/lenis.min.js"></script>
+  <script src="enhance.js"></script>
+</body>
+</html>

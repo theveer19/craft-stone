@@ -7,10 +7,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="preload" as="image" href="images/hero/jali-corridor.jpg">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="page-fix.css">
+  <link rel="stylesheet" href="enhance.css">
 </head>
-<body>
+<body class="has-hero">
 
   <a href="https://wa.me/919005533115?text=Hi%20Gwalior%20Stone%20Crafts!%20I'm%20interested%20in%20your%20collection." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
     <span style="font-size:1.5rem;">📱</span>
@@ -22,22 +24,46 @@
   <!-- HERO -->
   <div class="hero">
     <div class="hero-slider">
-      <div class="slide active" style="background-image:linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)),url('images/ballustrades/img-5216.jpg')"></div>
-      <div class="slide" style="background-image:linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)),url('images/cobbles/img-0468.jpg')"></div>
-      <div class="slide" style="background-image:linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)),url('images/stone-crafts/0a468e73-abee-480d-a8a5-2a190f07335e.jpg')"></div>
-      <div class="slide" style="background-image:linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)),url('images/stone-pebbles/3f223eec-13a8-4aab-8224-f66b8719ccf1.jpg')"></div>
+      <div class="slide active" style="background-image:url('images/hero/jali-corridor.jpg')"></div>
+      <div class="slide" style="background-image:url('images/hero/marble-temple.jpg')"></div>
+      <div class="slide" style="background-image:url('images/hero/stone-facade.jpg')"></div>
+      <div class="slide" style="background-image:url('images/hero/bedroom-feature-wall.jpg')"></div>
+      <div class="slide" style="background-image:url('images/hero/stone-slabs.jpg')"></div>
     </div>
     <div class="hero-content">
+      <div class="hero-tag">Gwalior · Madhya Pradesh</div>
+      <h1>
+        <span class="hero-line"><span>Natural Stone,</span></span>
+        <span class="hero-line"><span><em>Crafted to Last.</em></span></span>
+      </h1>
+      <p>Wall cladding, stone jali, mandirs, fountains and landscaping stone — hand-finished by skilled artisans and delivered across India.</p>
       <div class="hero-btns">
-        <button class="btn-primary" onclick="window.location.href='products.html'">Explore Collection</button>
-        <button class="btn-outline" onclick="window.location.href='contact.html'">Request a Quote</button>
+        <a class="btn-primary" href="products.html">Explore Collection</a>
+        <a class="btn-outline" href="contact.html">Request a Quote</a>
       </div>
     </div>
+    <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
     <div class="slider-dots">
       <span class="dot active"></span>
       <span class="dot"></span>
       <span class="dot"></span>
       <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-band">
+    <div class="stat"><div class="stat-num" data-count="25" data-suffix="+">25+</div><div class="stat-label">Years of Craft</div></div>
+    <div class="stat"><div class="stat-num" id="statProducts" data-count="100" data-suffix="+">100+</div><div class="stat-label">Stone Products</div></div>
+    <div class="stat"><div class="stat-num" id="statPhotos" data-count="450" data-suffix="+">450+</div><div class="stat-label">Project Photos</div></div>
+    <div class="stat"><div class="stat-num" id="statCats" data-count="8">8</div><div class="stat-label">Stone Categories</div></div>
+  </div>
+
+  <div class="stone-marquee" aria-hidden="true">
+    <div class="stone-marquee-track">
+      <span>Sandstone</span><span>Marble</span><span>Granite</span><span>Stone Jali</span><span>Wall Cladding</span><span>Stone Mandirs</span><span>Fountains</span><span>Cobblestones</span><span>Balustrades</span><span>Stone Signage</span>
+      <span>Sandstone</span><span>Marble</span><span>Granite</span><span>Stone Jali</span><span>Wall Cladding</span><span>Stone Mandirs</span><span>Fountains</span><span>Cobblestones</span><span>Balustrades</span><span>Stone Signage</span>
     </div>
   </div>
 
@@ -113,6 +139,23 @@
     </div>
   </div>
 
+  <!-- Featured work -->
+  <div class="work-strip">
+    <div class="work-strip-head">
+      <div>
+        <div class="section-tag">Our Work</div>
+        <h2 class="section-title" style="margin-bottom:12px">Recent Projects</h2>
+        <p class="section-subtitle">Real installations by our team — cladding, jali, fountains and more.</p>
+      </div>
+      <div class="rail-btns">
+        <button class="rail-btn" type="button" aria-label="Previous" onclick="railMove(-1)">‹</button>
+        <button class="rail-btn" type="button" aria-label="Next" onclick="railMove(1)">›</button>
+        <a class="btn-dark" href="gallery.html" style="margin-top:0;padding:14px 26px;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase">View Gallery →</a>
+      </div>
+    </div>
+    <div class="work-rail" id="workRail"></div>
+  </div>
+
   <!-- Testimonials -->
   <div class="testimonials-section">
     <div class="section-tag" style="color:var(--gold)">What Clients Say</div>
@@ -146,6 +189,18 @@
     </div>
   </div>
 
+  <!-- CTA -->
+  <div class="cta-band" style="--cta-img:url('images/wall-coverings/img-0946.jpg')">
+    <div>
+      <h2>Planning a project? <em>Let's build it in stone.</em></h2>
+      <p>Share your size, finish and location — we'll send designs, pricing and delivery timelines on WhatsApp.</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn-wa" id="ctaWa" target="_blank" rel="noopener" href="https://wa.me/919005533115?text=Hi%20Gwalior%20Stone%20Crafts!%20I%20want%20a%20quote%20for%20my%20project.">WhatsApp Us</a>
+      <a class="btn-primary" href="contact.html">Get a Quote</a>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer id="mainFooter"></footer>
 
@@ -169,10 +224,42 @@
       slides[i].classList.add('active');
       dots[i].classList.add('active');
     }
-    setInterval(() => {
-      currentSlide = (currentSlide + 1) % slides.length;
-      showSlide(currentSlide);
-    }, 4000);
+    let sliderTimer = setInterval(nextSlide, 6000);
+    function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; showSlide(currentSlide); }
+    dots.forEach((d, i) => d.addEventListener('click', () => {
+      currentSlide = i; showSlide(i);
+      clearInterval(sliderTimer); sliderTimer = setInterval(nextSlide, 6000);
+    }));
+
+    // Real numbers from the site's own data
+    document.getElementById('statProducts').dataset.count = PRODUCTS.length;
+    document.getElementById('statPhotos').dataset.count = GALLERY_ITEMS.length;
+    document.getElementById('statCats').dataset.count = MAIN_CATEGORIES.length;
+    // round down to a clean "100+" style figure
+    document.getElementById('statProducts').dataset.count = Math.floor(PRODUCTS.length / 10) * 10;
+    document.getElementById('statPhotos').dataset.count = Math.floor(GALLERY_ITEMS.length / 10) * 10;
+
+    // Recent projects rail: a few photos from each gallery category
+    (function () {
+      const rail = document.getElementById('workRail');
+      const labels = { wall: 'Wall Cladding', jali: 'Stone Jali', fountain: 'Fountains', crafts: 'Stone Crafts', landscape: 'Landscaping', balustrade: 'Balustrades', mandir: 'Stone Mandir', signage: 'Signage' };
+      const byCat = {};
+      GALLERY_ITEMS.forEach(g => { (byCat[g.cat] = byCat[g.cat] || []).push(g); });
+      const picks = [];
+      for (let round = 0; round < 2; round++)
+        Object.keys(labels).forEach(c => { const g = (byCat[c] || [])[round * 3]; if (g) picks.push(g); });
+      rail.innerHTML = picks.map(g => `
+        <a class="work-item" href="gallery.html">
+          <div class="wi-img" data-bg="${thumbOf(g.img)}"></div>
+          <div class="wi-cap"><small>Installation</small><strong>${labels[g.cat] || g.title}</strong></div>
+        </a>`).join('');
+    })();
+    function railMove(dir) {
+      const rail = document.getElementById('workRail');
+      rail.scrollBy({ left: dir * rail.clientWidth * 0.8, behavior: 'smooth' });
+    }
   </script>
+  <script src="vendor/lenis.min.js"></script>
+  <script src="enhance.js"></script>
 </body>
 </html>

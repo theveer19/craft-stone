@@ -18,6 +18,7 @@ function getCurrentPageId() {
     '':              'home',
     'index.html':    'home',
     'products.html': 'products',
+    'product.html':  'products',
     'about.html':    'about',
     'gallery.html':  'gallery',
     'blog.html':     'blog',

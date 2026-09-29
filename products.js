@@ -131,14 +131,14 @@ function renderProductsView(mainCat, subCat) {
   }
 
   grid.innerHTML = filtered.map(p => `
-    <div class="product-card" onclick="openModal(${p.id})">
+    <div class="product-card" onclick="location.href=productUrl(PRODUCTS.find(x => x.id === ${p.id}))">
       <div class="product-img-wrap">
         <div class="product-img" data-bg="${thumbOf(p.img)}"></div>
         ${p.badge ? `<div class="product-badge ${p.badge}">${p.badge}</div>` : ''}
         ${(p.imgs && p.imgs.length > 1) ? `<div class="photo-count">${p.imgs.length} photos</div>` : ''}
         <div class="product-actions">
           <button class="prod-action-btn" onclick="event.stopPropagation();openModal(${p.id})" title="Quick View">👁</button>
-          <button class="prod-action-btn" onclick="event.stopPropagation();window.location.href='contact.html'" title="Get Quote">✉</button>
+          <button class="prod-action-btn" onclick="event.stopPropagation();location.href=productUrl(PRODUCTS.find(x => x.id === ${p.id}))+'&quote=1'" title="Request Quote">✉</button>
         </div>
       </div>
       <div class="product-info">
@@ -209,6 +209,10 @@ function openModal(id) {
   document.getElementById('modalSpecs').innerHTML  = Object.entries(p.specs || {}).map(([k,v]) => `
     <div class="spec-item"><div class="spec-key">${k}</div><div class="spec-val">${v}</div></div>
   `).join('');
+  const full = document.getElementById('modalFull');
+  if (full) full.href = productUrl(p);
+  const q = document.getElementById('modalQuote');
+  if (q) q.onclick = () => { location.href = productUrl(p) + '&quote=1'; };
   document.getElementById('productModal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }

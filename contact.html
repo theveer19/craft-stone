@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="page-fix.css">
+  <link rel="stylesheet" href="enhance.css">
 </head>
 <body>
 
@@ -44,14 +45,14 @@
           <div class="contact-icon">📞</div>
           <div>
             <h4>Phone</h4>
-            <p>+91 9005533115<br>+91 7575950606</p>
+            <p><a href="tel:+919005533115">+91 90055 33115</a><br><a href="tel:+917575950606">+91 75759 50606</a></p>
           </div>
         </div>
         <div class="contact-detail">
           <div class="contact-icon">✉️</div>
           <div>
             <h4>Email</h4>
-            <p>gwaliorstonecrafts@gmail.com</p>
+            <p><a href="mailto:gwaliorstonecrafts@gmail.com">gwaliorstonecrafts@gmail.com</a></p>
           </div>
         </div>
       </div>
@@ -59,6 +60,11 @@
 
     <div class="contact-form">
       <h3>Send an Enquiry</h3>
+      <div class="enq-product" id="enqProduct" hidden>
+        <div class="enq-thumb" id="enqThumb"></div>
+        <div class="enq-meta"><small>Enquiry for</small><strong id="enqName"></strong><span id="enqCat"></span></div>
+        <button type="button" class="enq-x" onclick="clearEnqProduct()" aria-label="Remove product">✕</button>
+      </div>
       <div class="form-row">
         <div class="form-group">
           <label>First Name</label>
@@ -118,6 +124,7 @@
   <script src="data.js"></script>
   <script src="nav.js"></script>
   <script src="footer.js"></script>
+  <script src="products.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       injectNav('contact');
@@ -146,6 +153,7 @@
         `*Email:* ${email}%0A` +
         `*Phone:* ${phone}%0A` +
         `*Country:* ${country}%0A` +
+        (enqProduct ? `*Product:* ${encodeURIComponent(enqProduct.name)}%0A*Link:* ${encodeURIComponent(location.origin + location.pathname.replace(/contact\.html$/, '') + productUrl(enqProduct))}%0A` : '') +
         `*Interest:* ${product}%0A` +
         `*Message:* ${message}`;
 
@@ -154,5 +162,33 @@
       setTimeout(() => { document.getElementById('formSuccess').style.display = 'none'; }, 5000);
     }
   </script>
+  <script>
+    // Coming from a product? Show it on the form and send the enquiry with its name.
+    let enqProduct = null;
+    (function () {
+      const q = new URLSearchParams(location.search);
+      const key = q.get('p') || q.get('product');
+      if (!key) return;
+      enqProduct = PRODUCTS.find(p => p.slug === key || p.name.toLowerCase() === key.toLowerCase());
+      if (!enqProduct) return;
+      const main = MAIN_CATEGORIES.find(m => m.id === enqProduct.mainCategory);
+      document.getElementById('enqName').textContent = enqProduct.name;
+      document.getElementById('enqCat').textContent = getCategoryLabel(enqProduct.mainCategory, enqProduct.subCategory);
+      document.getElementById('enqThumb').style.backgroundImage = `url('${thumbOf(enqProduct.img)}')`;
+      document.getElementById('enqProduct').hidden = false;
+      const sel = document.getElementById('product');
+      const opt = [...sel.options].find(o => main && o.text.toLowerCase() === main.label.toLowerCase());
+      if (opt) sel.value = opt.value || opt.text;
+      const msg = document.getElementById('message');
+      if (msg && !msg.value) msg.value = 'I am interested in ' + enqProduct.name + '. Please share price, sizes and availability.';
+    })();
+    function clearEnqProduct() {
+      enqProduct = null;
+      document.getElementById('enqProduct').hidden = true;
+      history.replaceState(null, '', 'contact.html');
+    }
+  </script>
+  <script src="vendor/lenis.min.js"></script>
+  <script src="enhance.js"></script>
 </body>
 </html>
